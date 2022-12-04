@@ -1,0 +1,14 @@
+{
+  "name": "bcc-playwright-results",
+  "version": "1.0.0",
+  "main": "merge-reports.js",
+  "scripts": {
+    "merge-reports": "node merge-reports.js"
+  },
+  "dependencies": {
+    "playwright-merge-html-reports": "^0.2.6"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.28.1"
+  }
+}
