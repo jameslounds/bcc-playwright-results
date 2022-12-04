@@ -1,14 +1,18 @@
 const { mergeHTMLReports } = require("playwright-merge-html-reports");
 
-mergeHTMLReports(
-  [
-    process.cwd() + "/unmerged-reports/u-value-webkit",
-    process.cwd() + "/unmerged-reports/u-value-firefox",
-    process.cwd() + "/unmerged-reports/u-value-chromium",
+const { readdir } = require("fs/promises");
 
-    //   "./reports/beam-calc-webkit.html",
-    //   "./reports/beam-calc-firefox.html",
-    //   "./reports/beam-calc-chromium.html",
-  ],
-  { outputFolderName: "report", overwriteExisting: true }
-);
+const getDirectories = async (source) =>
+  (await readdir(source, { withFileTypes: true }))
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => dirent.name);
+
+(async () => {
+  const reportDirs = (await getDirectories("unmerged-reports")).map(
+    (dirname) => process.cwd() + "/unmerged-reports/" + dirname
+  );
+  mergeHTMLReports(reportDirs, {
+    outputFolderName: "report",
+    overwriteExisting: true,
+  });
+})();
