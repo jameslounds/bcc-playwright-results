@@ -8,8 +8,8 @@ const getDirectories = async (source) =>
     .map((dirent) => dirent.name);
 
 (async () => {
-  const reportDirs = (await getDirectories("unmerged-reports")).map(
-    (dirname) => process.cwd() + "/unmerged-reports/" + dirname
+  const reportDirs = (await getDirectories("unmerged-reports/workspace")).map(
+    (dirname) => process.cwd() + "/unmerged-reports/workspace/" + dirname
   );
   mergeHTMLReports(reportDirs, {
     outputFolderName: "report",
