@@ -6,6 +6,8 @@ on:
 
 jobs:
   merge-reports:
+    permissions: 
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -25,8 +27,7 @@ jobs:
         run: pnpm run merge-reports
 
       - name: "Deploy to gh-pages 🚀"
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: report
+          folder: report
+          clean: true
